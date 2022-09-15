@@ -1,0 +1,40 @@
+modifs projet :
+_ sur Login.js ( dans "container" )
+le employee par admin, dans admin
+
+_ package json : 
+laisser juste "jest --coverage" dans scripts / tests
+
+_ config json :
+"version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/bill-app/Billed-app-FR-Front/src/app/Store.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        }
+
+    // {
+    //     "type": "chrome",
+    //     "request": "launch",
+    //     "name": "Launch Chrome",
+    //     "url": "http://localhost:8080",
+    //     "webRoot": "${workspaceFolder}"
+    // }
+    ]
+
+_ Bills.js ( dans _tests_ )
+
+test('Then bills should be ordered from earliest to latest', () => {
+      document.body.innerHTML = BillsUI({ data: bills });
+      const dates = screen
+        .getAllByText(/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i)
+        .map((a) => a.innerHTML);
+      const antiChrono = (a, b) => b - a;
+      const datesSorted = [...dates].sort(antiChrono);
+      expect(dates).toEqual(datesSorted);
+    });
